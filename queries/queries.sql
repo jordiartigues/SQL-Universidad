@@ -170,7 +170,7 @@ WHERE id_profesor IS NULL;
 
 SELECT DISTINCT departamento.nombre
 FROM departamento
-LEFT JOIN profesor
+INNER JOIN profesor
     ON departamento.id = profesor.id_departamento
 LEFT JOIN asignatura
     ON profesor.id_profesor = asignatura.id_profesor
