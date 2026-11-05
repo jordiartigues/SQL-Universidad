@@ -156,7 +156,7 @@ FROM profesor
 INNER JOIN persona
     ON profesor.id_profesor = persona.id
 LEFT JOIN asignatura
-    ON profesor.id_profesor = asignatura_id_profesor
+    ON profesor.id_profesor = asignatura.id_profesor
 WHERE asignatura.id IS NULL;
 
 -- 14. Retorna un llistat amb les assignatures que no tenen un professor/a assignat. (id, nombre)
@@ -174,7 +174,7 @@ LEFT JOIN profesor
     ON departamento.id = profesor.id_departamento
 LEFT JOIN asignatura
     ON profesor.id_profesor = asignatura.id_profesor
-WHERE asignatura.id IS NULL;
+WHERE asignatura.id IS NULL
     AND profesor.id_profesor IS NOT NULL;
 
 -- 16. Retorna el nombre total d'alumnes que hi ha. (total)
