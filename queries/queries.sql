@@ -113,9 +113,9 @@ WHERE persona.tipo = 'alumno'
 -- 10. Retorna un llistat amb els noms de tots els professors/es i els departaments que tenen vinculats. El llistat també ha de mostrar aquells professors/es que no tenen cap departament associat. El llistat ha de retornar quatre columnes, nom del departament, primer cognom, segon cognom i nom del professor/a. El resultat estarà ordenat alfabèticament de menor a major pel nom del departament, cognoms i el nom. (departamento, apellido1, apellido2, nombre)
 
 SELECT departamento.nombre AS departamento,
-	persona.nombre,
     persona.apellido1,
-    persona.apellido2
+    persona.apellido2,
+    persona.nombre
 FROM profesor
 INNER JOIN persona
     ON profesor.id_profesor = persona.id
@@ -128,9 +128,9 @@ ORDER BY departamento.nombre ASC,
 
 -- 11. Retorna un llistat amb els professors/es que no estan associats a un departament. (apellido1, apellido2, nombre)
 
-SELECT persona.nombre,
-    persona.apellido1,
-    persona.apellido2
+SELECT persona.apellido1,
+    persona.apellido2,
+    persona.nombre
 FROM profesor 
 INNER JOIN persona
     ON profesor.id_profesor = persona.id
@@ -145,7 +145,7 @@ SELECT departamento.nombre
 FROM departamento
 LEFT JOIN profesor
     ON profesor.id_departamento = departamento.id
-WHERE profesor.id_departamento IS NULL
+WHERE profesor.id_departamento IS NULL;
 
 -- 13. Retorna un llistat amb els professors/es que no imparteixen cap assignatura. (apellido1, apellido2, nombre)
 
@@ -218,6 +218,7 @@ LEFT JOIN asignatura
     ON grado.id = asignatura.id_grado
 GROUP BY grado.nombre
 ORDER BY total DESC;
+
 
 -- 21. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun, dels graus que tinguin més de 40 assignatures associades. (grau, total)
 
