@@ -156,7 +156,7 @@ FROM profesor
 INNER JOIN persona
     ON profesor.id_profesor = persona.id
 LEFT JOIN asignatura
-    ON profesor.id_profesor = asignatura_id.profesor
+    ON profesor.id_profesor = asignatura_id_profesor
 WHERE asignatura.id IS NULL;
 
 -- 14. Retorna un llistat amb les assignatures que no tenen un professor/a assignat. (id, nombre)
@@ -175,6 +175,7 @@ LEFT JOIN profesor
 LEFT JOIN asignatura
     ON profesor.id_profesor = asignatura.id_profesor
 WHERE asignatura.id IS NULL;
+    AND profesor.id_profesor IS NOT NULL;
 
 -- 16. Retorna el nombre total d'alumnes que hi ha. (total)
 
@@ -192,7 +193,7 @@ WHERE tipo = 'alumno'
 -- 18. Calcula quants professors/es hi ha en cada departament. El resultat només ha de mostrar dues columnes, una amb el nom del departament i una altra amb el nombre de professors/es que hi ha en aquest departament. El resultat només ha d'incloure els departaments que tenen professors/es associats i haurà d'estar ordenat de major a menor pel nombre de professors/es. (departamento, total)
 
 
-SELECT departamento.nombre,
+SELECT departamento.nombre AS departamento,
 	COUNT(*) AS total
 FROM profesor
 INNER JOIN departamento 
@@ -218,7 +219,6 @@ LEFT JOIN asignatura
     ON grado.id = asignatura.id_grado
 GROUP BY grado.nombre
 ORDER BY total DESC;
-
 
 -- 21. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun, dels graus que tinguin més de 40 assignatures associades. (grau, total)
 
